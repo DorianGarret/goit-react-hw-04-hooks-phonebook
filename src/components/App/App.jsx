@@ -36,6 +36,15 @@ export default function App() {
     setFilter('');
   };
 
+  const getVisibleContacts = () => {
+    const normalizedFilter = filter.toLowerCase();
+    return contacts.filter(item =>
+      item.name.toLowerCase().includes(normalizedFilter),
+    );
+  };
+
+  const visibleContact = getVisibleContacts();
+
   return (
     <Container>
       <Phonebook>Phonebook</Phonebook>
@@ -43,7 +52,10 @@ export default function App() {
       <Contacts>Contacts</Contacts>
       <Filter value={filter} onChange={changeFilter} />
       {contacts.length > 0 && (
-        <ContactList contacts={contacts} onDeleteContact={deleteContact} />
+        <ContactList
+          contacts={visibleContact}
+          onDeleteContact={deleteContact}
+        />
       )}
       {!contacts.length && <Empty>Phonebook is Empty</Empty>}
     </Container>
