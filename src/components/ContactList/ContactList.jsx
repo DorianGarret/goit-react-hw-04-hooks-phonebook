@@ -1,10 +1,10 @@
 import PropTypes from 'prop-types';
 import { List, ListItem, Button, Icon } from './ContactList.styled';
 
-export default function ContactList({ getContact, onDeleteContact }) {
+export default function ContactList({ contacts, onDeleteContact }) {
   return (
     <List>
-      {getContact.map(({ id, name, number }) => (
+      {contacts.map(({ id, name, number }) => (
         <ListItem key={id}>
           <p>{`${name}: ${number}`}</p>
           <Button onClick={() => onDeleteContact(id)}>
@@ -18,6 +18,6 @@ export default function ContactList({ getContact, onDeleteContact }) {
 }
 
 ContactList.propTypes = {
-  getContact: PropTypes.array.isRequired,
+  contacts: PropTypes.arrayOf(PropTypes.objectOf(PropTypes.string.isRequired)),
   onDeleteContact: PropTypes.func.isRequired,
 };
