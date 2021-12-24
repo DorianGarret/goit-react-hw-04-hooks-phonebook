@@ -25,8 +25,8 @@ export default function App() {
     setContacts([contact, ...contacts]);
   };
 
-  const changeFilter = event => {
-    setFilter(event.target.value);
+  const changeFilter = ({ target: { value } }) => {
+    setFilter(value);
   };
 
   const deleteContact = contactId => {
